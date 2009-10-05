@@ -1,5 +1,5 @@
 #include <windows.h> 
-#include "graphics2d.cpp"
+#include "graphics2d.h"
 
 
 Canvas cvs(640,480);

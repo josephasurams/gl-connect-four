@@ -12,7 +12,7 @@ const int screenHeight = 480; // height of screen window in pixels
 
 void myInit(void)
 {
-	glClearColor(1.0,1.0,1.0,0.0); 
+	glClearColor(1.0,1.0,1.0,0.0);
 	glColor3f(0.0f, 0.0f, 0.0f); 
 	glPointSize(2.0); 
 	glMatrixMode(GL_PROJECTION); 

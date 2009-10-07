@@ -10,7 +10,7 @@ If you've never used Subversion before, you should read the first paragraph on i
 
 = Setup =
   # To use Subversion through Visual Studio 2008, you have to install a plugin. Download it  here and install it. http://ankhsvn.net/downloads/2.1/
-  # In this GoogleCode project, go to the 'Source' tab. (make sure you're already logged in with your gmail account!)
+  # In this googlecode project, go to the 'Source' tab. (make sure you're already logged in with your gmail account!)
   # Click the link that says "google.com password"
   # Copy the bold generated password, you'll need it in a minute.
   # Start Visual Studio, go to File > Subversion > Open From Subversion

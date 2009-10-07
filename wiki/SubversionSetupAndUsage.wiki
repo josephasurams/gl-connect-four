@@ -1,4 +1,5 @@
 #summary Setting up Subversion
+#labels Phase-Requirements
 
 = Introduction =
 

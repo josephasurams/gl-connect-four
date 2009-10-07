@@ -9,3 +9,19 @@ If you've never used Subversion before, you should read the first paragraph on i
 
 = Setup =
   # To use Subversion through Visual Studio 2008, you have to install a plugin. Download it  here and install it. http://ankhsvn.net/downloads/2.1/
+  # In this GoogleCode project, go to the 'Source' tab. (make sure you're already logged in with your gmail account!)
+  # Click the link that says "google.com password"
+  # Copy the bold generated password, you'll need it in a minute.
+  # Start Visual Studio, go to File > Subversion > Open From Subversion
+  # In the file browser window that pops up, there is a box at the top that lets you enter a URL. In this box, type: https://gl-connect-four.googlecode.com/svn/trunk/
+  # A login box pops up, enter your gmail login name (without the @gmail.com part) and the password you just copied down.
+ # Browse down to the .sln file and open it. A box pops up with options for importing the project. Just leave everything default and hit okay.
+
+= Usage =
+After installing the plugin you should have a new window at the bottom of Visual Studio. It has two buttons you need to be concerned about: *Commit* and *Update*
+
+Update updates your local copy of the code to the copy of the code currently on the server. This means you'll get any changes anyone else in the group has made to the project.
+
+A Commit sends your changes to the server, replacing the server's copy.
+
+You can revert to any previous copy of the source code, so don't worry about messing up your copy of the code. Just don't mess up the repository!

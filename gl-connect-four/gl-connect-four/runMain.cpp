@@ -222,7 +222,7 @@ void keyboard(unsigned char key,int x, int y)
 			}
 			else if(circleArray[0][6].color == 'r')
 			{
-				circleArray[0][6].color = 'b';
+				circleArray[0][6].color  = 'b';
 				circleArray[0][0].color = 'r';
 				z= 7;//get out of the for loop
 			}

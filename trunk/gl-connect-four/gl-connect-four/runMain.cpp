@@ -91,8 +91,36 @@ void newGame(void)
 	circleArray[0][0].color = 'r'; //red
 
 }
+
+void drawButtons() {
+	//draw button background
+	glPushMatrix();
+	glColor3f(1.0,1.0,0.0);
+	glBegin(GL_QUADS);
+	glVertex2i(SCREENWIDTH-200,60);
+	glVertex2i(SCREENWIDTH-20,60);
+	glVertex2i(SCREENWIDTH-20,20);
+	glVertex2i(SCREENWIDTH-200,20);
+	glEnd();
+	//draw text ("Reset Game");
+	glColor3f(0.0,0.0,0.0);
+	glRasterPos2i(SCREENWIDTH-170,30);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 82);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 115);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 116);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 32);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 71);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 97);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 109);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
+	glPopMatrix();
+}
+
 void drawGame(void)
 {
+	drawButtons();
 	glPushMatrix();
 	glColor3f(0.0,0.0,1.0);
 	glRecti(150,80,630,385);

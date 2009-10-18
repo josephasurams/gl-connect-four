@@ -28,6 +28,9 @@ void newGame(void);
 void delay(const int n);
 void drawGame(void);
 void drawCircle(int i, int j);
+void drawButtons();
+void drawPlayerTurnBox();
+char findWhosTurn();
 
 
 
@@ -35,6 +38,7 @@ float R;
 float radius = 20.0;
 circle circleArray[7][7]; 
 int gameArray[6][7]; 
+bool highlightButton = false;
 #define TWOPI 2*3.14159265
 
 void setWindow(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top)
@@ -58,17 +62,23 @@ void myInit(void)
 	glLineWidth(2.0);
 	setWindow(0,SCREENWIDTH,0,SCREENHEIGHT);
 	setViewport(0,SCREENWIDTH,0,SCREENHEIGHT);
-    
 	
 	newGame();
-
-	
 }
+
+char findWhosTurn() {
+	//loop unti who's turn it is, is found
+	bool continueLooping = true;
+	for(int i = 0; continueLooping; i++) {
+		if((circleArray[0][i].color == 'r') || (circleArray[0][i].color == 'g'))
+			return circleArray[0][i].color;
+	}
+}
+
+
+
 void newGame(void)
 {
-	//Set up the Game
-
-	//All Black/Empty
 	
 	for(int m = 0; m < 6; m++)
 	{
@@ -94,8 +104,7 @@ void newGame(void)
 
 void drawButtons() {
 	//draw button background
-	glPushMatrix();
-	glColor3f(1.0,1.0,0.0);
+	highlightButton?glColor3f(1.0,0.0,0.0):glColor3f(1.0,1.0,0.0);
 	glBegin(GL_QUADS);
 	glVertex2i(SCREENWIDTH-200,60);
 	glVertex2i(SCREENWIDTH-20,60);
@@ -115,12 +124,12 @@ void drawButtons() {
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 97);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 109);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
-	glPopMatrix();
 }
 
 void drawGame(void)
 {
 	drawButtons();
+	drawPlayerTurnBox();
 	glPushMatrix();
 	glColor3f(0.0,0.0,1.0);
 	glRecti(150,80,630,385);
@@ -139,6 +148,47 @@ void drawGame(void)
 	glPopMatrix();
 	
 }
+
+void drawPlayerTurnBox() {
+	//draw who's turn it is
+	glColor3f(0.0,0.0,0.0);
+	char c = findWhosTurn();
+	if (findWhosTurn() == 'r') {
+		//"Red"
+		glColor3f(1.0,0.0,0.0);
+		glRasterPos2i(20,30);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 82);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 100);
+	} else {
+		//"Green"
+		glColor3f(0.0,1.0,0.0);
+		glRasterPos2i(20,30);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 71);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 114);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 110);
+	}
+	//" player's turn"
+	glColor3f(1.0,1.0,0.0);
+	glRasterPos2i((findWhosTurn()=='r')?63:80, 30);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 32);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 80);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 108);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 97);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 121);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 114);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 96);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 115);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 32);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 84);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 117);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 114);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 110);
+}
+
 void drawCircle(int i, int j)
 {
 	float x = circleArray[i][j].x;
@@ -193,7 +243,7 @@ int main()
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(SCREENWIDTH, SCREENHEIGHT);
 	glutInitWindowPosition(100,150);
-	glutCreateWindow("Mouse Chase");
+	glutCreateWindow("GL Connect 4");
 	glutDisplayFunc(myDisplay);
 	glutReshapeFunc(myReshape);
 	glutIdleFunc(myIdle);
@@ -201,19 +251,29 @@ int main()
 	glutKeyboardFunc(keyboard);
 	myInit();
 	glutMainLoop();
-	return 1; 
 
+	return 0; 
 }
 
 void myMouse(int button, int state, int x, int y)
 {
-//if left button clicked move the rat
+	//invert y
+	y = SCREENHEIGHT - y;
+
 	if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
-		
+		if((x >= SCREENWIDTH-200) && (x <= SCREENWIDTH-20)) {
+			if ((y >= 20) && (y <= 60)) {
+				highlightButton = true;
+				newGame();
+			}
+		}
+	} else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
+			highlightButton = false;
 	}
 }
 
+/*
 void writeText(GLfloat x, GLfloat y, char *text)
 {
     char *p;
@@ -225,7 +285,7 @@ void writeText(GLfloat x, GLfloat y, char *text)
         glutBitmapCharacter (GLUT_BITMAP_TIMES_ROMAN_24, *p);
     glPopMatrix();
 	
-}
+}*/
 void keyboard(unsigned char key,int x, int y)
 {
 

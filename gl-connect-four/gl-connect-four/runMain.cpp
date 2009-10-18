@@ -277,7 +277,7 @@ int main()
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowSize(SCREENWIDTH, SCREENHEIGHT);
 	glutInitWindowPosition(100,150);
-	glutCreateWindow("GL Connect 4");
+	glutCreateWindow("GL Connect Four");
 	glutDisplayFunc(myDisplay);
 	glutReshapeFunc(myReshape);
 	glutIdleFunc(myIdle);

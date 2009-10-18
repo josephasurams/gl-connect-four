@@ -104,12 +104,12 @@ void drawButtons() {
 	glEnd();
 	//draw text ("Reset Game");
 	glColor3f(0.0,0.0,0.0);
-	glRasterPos2i(SCREENWIDTH-170,30);
+	glRasterPos2i(SCREENWIDTH-170,30);// yo you can use the writeText function to write text
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 82);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 115);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 116);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);// you just have to do is  
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 116);//writeText(location of x, location of y,"text"); 
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 32);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 71);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 97);

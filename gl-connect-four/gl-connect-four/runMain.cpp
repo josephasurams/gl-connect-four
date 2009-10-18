@@ -29,7 +29,7 @@ void delay(const int n);
 void drawGame(void);
 void drawCircle(int i, int j);
 
-int tmp = 1; //kepts track which playes turn ( 1 = player 1, 2 = player 2)
+
 
 float R; 
 float radius = 20.0;

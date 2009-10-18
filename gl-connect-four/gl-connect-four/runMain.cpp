@@ -57,7 +57,7 @@ AUX_RGBImageRec *LoadBMP(char *Filename)					// Loads A Bitmap Image
 		return auxDIBImageLoad(Filename);				// Load The Bitmap And Return A Pointer
 	}
 	return NULL;								// If Load Failed Return NULL
-}
+}/*
 int LoadGLTextures()								// Load Bitmaps And Convert To Textures
 {
 	int Status=FALSE;
@@ -72,7 +72,7 @@ int LoadGLTextures()								// Load Bitmaps And Convert To Textures
 		glBindTexture(GL_TEXTURE_2D, texture[0]);
 		// Generate The Texture
 		glTexImage2D(GL_TEXTURE_2D, 0, 3, TextureImage[0]->sizeX, TextureImage[0]->sizeY, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureImage[0]->data);
-	//PICKUP HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!(http://nehe.gamedev.net/data/lessons/lesson.asp?lesson=06) halfway down
+	//PICKUP HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!(http://nehe.gamedev.net/data/lessons/lesson.asp?lesson=06) halfway down*/
 void setWindow(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top)
 {
 	glMatrixMode(GL_PROJECTION);

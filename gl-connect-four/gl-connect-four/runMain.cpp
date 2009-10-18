@@ -40,7 +40,39 @@ circle circleArray[7][7];
 int gameArray[6][7]; 
 bool highlightButton = false;
 #define TWOPI 2*3.14159265
+GLuint texture[1];
 
+AUX_RGBImageRec *LoadBMP(char *Filename)					// Loads A Bitmap Image
+{
+	FILE *File=NULL;							// File Handle
+
+	if (!Filename)								// Make Sure A Filename Was Given
+	{
+		return NULL;							// If Not Return NULL
+	}
+	File=fopen(Filename,"r");						// Check To See If The File Exists
+	if (File)								// Does The File Exist?
+	{
+		fclose(File);							// Close The Handle
+		return auxDIBImageLoad(Filename);				// Load The Bitmap And Return A Pointer
+	}
+	return NULL;								// If Load Failed Return NULL
+}
+int LoadGLTextures()								// Load Bitmaps And Convert To Textures
+{
+	int Status=FALSE;
+	AUX_RGBImageRec *TextureImage[1];
+	memset(TextureImage,0,sizeof(void *)*1);
+	if (TextureImage[0]=LoadBMP("Data/NeHe.bmp"))
+	{
+		Status=TRUE;							// Set The Status To TRUE
+		glGenTextures(1, &texture[0]);					// Create The Texture
+
+		// Typical Texture Generation Using Data From The Bitmap
+		glBindTexture(GL_TEXTURE_2D, texture[0]);
+		// Generate The Texture
+		glTexImage2D(GL_TEXTURE_2D, 0, 3, TextureImage[0]->sizeX, TextureImage[0]->sizeY, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureImage[0]->data);
+	//PICKUP HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!(http://nehe.gamedev.net/data/lessons/lesson.asp?lesson=06) halfway down
 void setWindow(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top)
 {
 	glMatrixMode(GL_PROJECTION);
@@ -65,6 +97,8 @@ void myInit(void)
 	
 	newGame();
 }
+
+
 
 char findWhosTurn() {
 	//loop unti who's turn it is, is found
@@ -240,7 +274,7 @@ void myIdle()
 int main()
 {
 	glutInit(&argc, &argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowSize(SCREENWIDTH, SCREENHEIGHT);
 	glutInitWindowPosition(100,150);
 	glutCreateWindow("GL Connect 4");
@@ -273,7 +307,6 @@ void myMouse(int button, int state, int x, int y)
 	}
 }
 
-/*
 void writeText(GLfloat x, GLfloat y, char *text)
 {
     char *p;
@@ -285,7 +318,7 @@ void writeText(GLfloat x, GLfloat y, char *text)
         glutBitmapCharacter (GLUT_BITMAP_TIMES_ROMAN_24, *p);
     glPopMatrix();
 	
-}*/
+}
 void keyboard(unsigned char key,int x, int y)
 {
 

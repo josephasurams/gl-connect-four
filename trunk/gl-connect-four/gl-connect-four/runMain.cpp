@@ -73,7 +73,7 @@ char findWhosTurn() {
 	//loop unti who's turn it is, is found
 	bool continueLooping = true;
 	for(int i = 0; continueLooping; i++) {
-		if((circleArray[0][i].color == 'r') || (circleArray[0][i].color == 'g'))
+		if((circleArray[0][i].color == 'r') || (circleArray[0][i].color == 'b'))
 			return circleArray[0][i].color;
 	}
 }
@@ -98,7 +98,7 @@ void newGame(void)
 		{
 			circleArray[m][z].x =60 + w;
 			circleArray[m][z].y = 60 ;
-			circleArray[m][z].color = 'g'; //black defaul
+			circleArray[m][z].color = 'g'; //Gray default
 		}
 	}
 	circleArray[0][0].color = 'r'; //red
@@ -155,7 +155,7 @@ void drawGame(void)
 void drawPlayerTurnBox() {
 	//draw who's turn it is
 	glColor3f(0.0,0.0,0.0);
-	char c = findWhosTurn();
+	//char c = findWhosTurn();
 	if (findWhosTurn() == 'r') {
 		//"Red"
 		glColor3f(1.0,0.0,0.0);
@@ -275,12 +275,12 @@ void writeText(GLfloat x, GLfloat y, char *text)
 {
     char *p;
     
-    glPushMatrix();
+   
 	glColor3f(1.0,0.0,0.0); 
     glRasterPos2f(x,y); 
     for (p = text; *p; p++)
         glutBitmapCharacter (GLUT_BITMAP_TIMES_ROMAN_24, *p);
-    glPopMatrix();
+   
 	
 }
 void keyboard(unsigned char key,int x, int y)

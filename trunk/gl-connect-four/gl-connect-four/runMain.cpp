@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
-
 #include <gl\glut.h>
 
 
@@ -32,11 +31,9 @@ circle circleArray[7][7];
 int gameArray[6][7]; 
 bool highlightNewButton = false;
 bool highlightExitButton = false;
-#define TWOPI 2*3.14159265
-//used for glut init - Don't really do anything!
-int argc = 1;
-char *argv = "";
 
+//----------------------- Variable Define------------------------------------
+#define TWOPI 2*3.14159265
 #define SCREENWIDTH 800
 #define SCREENHEIGHT 600
 
@@ -239,7 +236,7 @@ void myIdle()
 	glutPostRedisplay();
 }
 //-------------------------------MAIN----------------------------------------------------
-int main()
+int main(int argc, char* argv)
 {
 	glutInit(&argc, &argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);

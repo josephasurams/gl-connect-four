@@ -73,7 +73,7 @@ char findWhosTurn() {
 	//loop unti who's turn it is, is found
 	bool continueLooping = true;
 	for(int i = 0; continueLooping; i++) {
-		if((circleArray[0][i].color == 'r') || (circleArray[0][i].color == 'g')) {
+		if((circleArray[0][i].color == 'r') || (circleArray[0][i].color == 'b')) {
 			return circleArray[0][i].color;
 			continueLooping = false;
 		}

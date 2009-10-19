@@ -38,7 +38,8 @@ float R;
 float radius = 20.0;
 circle circleArray[7][7]; 
 int gameArray[6][7]; 
-bool highlightButton = false;
+bool highlightNewButton = false;
+bool highlightExitButton = false;
 #define TWOPI 2*3.14159265
 
 
@@ -109,32 +110,25 @@ void newGame(void)
 
 void drawButtons() {
 	//draw button background
-	highlightButton?glColor3f(1.0,0.0,0.0):glColor3f(1.0,1.0,0.0);
+	highlightNewButton?glColor3f(1.0,0.0,0.0):glColor3f(1.0,1.0,0.0);
 	glBegin(GL_QUADS);
 	glVertex2i(SCREENWIDTH-200,60);
 	glVertex2i(SCREENWIDTH-20,60);
 	glVertex2i(SCREENWIDTH-20,20);
 	glVertex2i(SCREENWIDTH-200,20);
+	glEnd();
 
-	glVertex2i(SCREENWIDTH-320, 60);
+	highlightExitButton?glColor3f(1.0,0.0,0.0):glColor3f(1.0,1.0,0.0);
+	glBegin(GL_QUADS);
+	glVertex2i(SCREENWIDTH-300, 60);
 	glVertex2i(SCREENWIDTH-220, 60);
 	glVertex2i(SCREENWIDTH-220, 20);
-	glVertex2i(SCREENWIDTH-320, 20);
+	glVertex2i(SCREENWIDTH-300, 20);
 	glEnd();
 	//draw text ("Reset Game");
 	glColor3f(0.0,0.0,0.0);
-	/*glRasterPos2i(SCREENWIDTH-170,30);// yo you can use the writeText function to write text
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 82);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 115);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);// you just have to do is  
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 116);//writeText(location of x, location of y,"text"); 
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 32);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 71);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 97);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 109);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);*/
 	writeText(SCREENWIDTH-170, 30, "Reset Game");
+	writeText(SCREENWIDTH-280, 30, "Exit");
 }
 
 void drawGame(void)
@@ -272,12 +266,18 @@ void myMouse(int button, int state, int x, int y)
 	{
 		if((x >= SCREENWIDTH-200) && (x <= SCREENWIDTH-20)) {
 			if ((y >= 20) && (y <= 60)) {
-				highlightButton = true;
+				highlightNewButton = true;
 				newGame();
 			}
+		} else if((x >= SCREENWIDTH-300) && (x <= SCREENWIDTH-220)) {
+				if ((y >= 20) && (y <= 60)) {
+					exit(0);
+				}
 		}
+	
 	} else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
-			highlightButton = false;
+			highlightNewButton = false;
+			highlightExitButton = false;
 	}
 }
 

@@ -129,7 +129,7 @@ void newGame(void)
 		{
 			circleArray[m][z].x =60 + w;
 			circleArray[m][z].y = 60 ;
-			circleArray[m][z].color = 'b'; //black defaul
+			circleArray[m][z].color = 'g'; //black defaul
 		}
 	}
 	circleArray[0][0].color = 'r'; //red
@@ -195,14 +195,9 @@ void drawPlayerTurnBox() {
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 100);
 	} else {
-		//"Green"
-		glColor3f(0.0,1.0,0.0);
-		glRasterPos2i(20,30);
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 71);
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 114);
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 110);
+		//"black"
+		glColor3f(0.0,0.0,0.0);
+		writeText(20.0,30.0,"Black");
 	}
 	//" player's turn"
 	glColor3f(1.0,1.0,0.0);

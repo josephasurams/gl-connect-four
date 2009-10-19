@@ -236,9 +236,9 @@ void myIdle()
 	glutPostRedisplay();
 }
 //-------------------------------MAIN----------------------------------------------------
-int main(int argc, char* argv)
+int main(int argc, char** argv)
 {
-	glutInit(&argc, &argv);
+	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(SCREENWIDTH, SCREENHEIGHT);
 	glutInitWindowPosition(100,150);

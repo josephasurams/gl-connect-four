@@ -31,7 +31,7 @@ void drawCircle(int i, int j);
 void drawButtons();
 void drawPlayerTurnBox();
 char findWhosTurn();
-
+void camera(void);
 
 
 float R; 
@@ -142,6 +142,8 @@ void drawGame(void)
 	drawButtons();
 	drawPlayerTurnBox();
 	glPushMatrix();
+	
+	
 	glColor3f(1.0,1.0,0.0);
 	glRecti(150,80,630,385);
 	glTranslatef(70,350,0);
@@ -226,6 +228,7 @@ void myDisplay(void)
     drawGame();
 	
 	glutSwapBuffers();
+	
 	
 }
 

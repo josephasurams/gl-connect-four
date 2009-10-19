@@ -42,7 +42,7 @@ bool highlightButton = false;
 #define TWOPI 2*3.14159265
 GLuint texture[1];
 
-AUX_RGBImageRec *LoadBMP(char *Filename)					// Loads A Bitmap Image
+/*AUX_RGBImageRec *LoadBMP(char *Filename)					// Loads A Bitmap Image
 {
 	FILE *File=NULL;							// File Handle
 
@@ -89,7 +89,7 @@ void setViewport(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top)
 }
 void myInit(void)
 {
-	glClearColor(0.0,0.0,0.0,1.0);
+	glClearColor(0.0,1.0,0.0,1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLineWidth(2.0);
 	setWindow(0,SCREENWIDTH,0,SCREENHEIGHT);
@@ -165,7 +165,7 @@ void drawGame(void)
 	drawButtons();
 	drawPlayerTurnBox();
 	glPushMatrix();
-	glColor3f(0.0,0.0,1.0);
+	glColor3f(1.0,1.0,0.0);
 	glRecti(150,80,630,385);
 	glTranslatef(70,350,0);
 	for(int m = 0; m < 7; m++)
@@ -227,10 +227,10 @@ void drawCircle(int i, int j)
 {
 	float x = circleArray[i][j].x;
 	float y = circleArray[i][j].y;
-	if(circleArray[i][j].color == 'b')//Black
-		glColor3f(0.0,0.0,0.0); 
 	if(circleArray[i][j].color == 'g')//Green
 		glColor3f(0.0,1.0,0.0); 
+	if(circleArray[i][j].color == 'b')//black
+		glColor3f(0.0,0.0,0.0); 
 	if(circleArray[i][j].color == 'r')//Red
 		glColor3f(1.0,0.0,0.0); 
 	float angle = 0, angleInc = TWOPI/200; //angle increment
@@ -331,26 +331,26 @@ void keyboard(unsigned char key,int x, int y)
 			
 			if(circleArray[0][z].color == 'r')
 			{
-				circleArray[0][z].color = 'b';
+				circleArray[0][z].color = 'g';
 				circleArray[0][z+1].color = 'r';
 				z= 7;//get out of the for loop
 			}
-			else if (circleArray[0][z].color == 'g')
+			else if (circleArray[0][z].color == 'b')
 			{
-				circleArray[0][z].color = 'b';
-				circleArray[0][z+1].color = 'g';
+				circleArray[0][z].color = 'g';
+				circleArray[0][z+1].color = 'b';
 				z= 7;//get out of the for loop
 			}
 			else if(circleArray[0][6].color == 'r')
 			{
-				circleArray[0][6].color  = 'b';
+				circleArray[0][6].color  = 'g';
 				circleArray[0][0].color = 'r';
 				z= 7;//get out of the for loop
 			}
-		    else if (circleArray[0][6].color == 'g')
+		    else if (circleArray[0][6].color == 'b')
 			{
-				circleArray[0][6].color = 'b';
-				circleArray[0][0].color = 'g';
+				circleArray[0][6].color = 'g';
+				circleArray[0][0].color = 'b';
 				z= 7;//get out of the for loop
 
 			}//end of if
@@ -365,27 +365,27 @@ void keyboard(unsigned char key,int x, int y)
 		{
 			if(circleArray[0][0].color == 'r')
 			{
-				circleArray[0][0].color = 'b';
+				circleArray[0][0].color = 'g';
 				circleArray[0][6].color = 'r';
 				z= 0;//get out of the for loop
 			}
-			else if (circleArray[0][0].color == 'g')
+			else if (circleArray[0][0].color == 'b')
 			{
-				circleArray[0][0].color = 'b';
-				circleArray[0][6].color = 'g';
+				circleArray[0][0].color = 'g';
+				circleArray[0][6].color = 'b';
 				z= 0;//get out of the for loop
 			
 			}
 			else if(circleArray[0][z].color == 'r')
 			{
-				circleArray[0][z].color = 'b';
+				circleArray[0][z].color = 'g';
 				circleArray[0][z-1].color = 'r';
 				z= 0;//get out of the for loop
 			}
-			else if (circleArray[0][z].color == 'g')
+			else if (circleArray[0][z].color == 'b')
 			{
-				circleArray[0][z].color = 'b';
-				circleArray[0][z-1].color = 'g';
+				circleArray[0][z].color = 'g';
+				circleArray[0][z-1].color = 'b';
 				z= 0;//get out of the for loop
 			
 		    
@@ -407,12 +407,12 @@ void keyboard(unsigned char key,int x, int y)
 			{
 				if(gameArray[z][m] == 0) //check if there something on that spot
 				{												//Check if it is able to drop
-					circleArray[z][m].color = 'b';
+					circleArray[z][m].color = 'g';
 					circleArray[z+1][m].color = 'r';
 					
 					gameArray[z-1][m] = 0;
 					gameArray[z][m]= 1;
-					circleArray[0][0].color = 'g';//change turn
+					circleArray[0][0].color = 'b';//change turn
 				
 				}
 				
@@ -420,12 +420,12 @@ void keyboard(unsigned char key,int x, int y)
 				
 				
 			}
-			else if (circleArray[z][m].color == 'g')
+			else if (circleArray[z][m].color == 'b')
 			{
 				if(gameArray[z][m] == 0)
 				{
-					circleArray[z][m].color = 'b';
-					circleArray[z+1][m].color = 'g';
+					circleArray[z][m].color = 'g';
+					circleArray[z+1][m].color = 'b';
 					gameArray[z-1][m] = 0;
 					gameArray[z][m] = 2; 
 					circleArray[0][0].color = 'r';//change turn

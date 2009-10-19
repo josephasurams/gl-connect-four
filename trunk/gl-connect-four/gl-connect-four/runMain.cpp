@@ -73,8 +73,10 @@ char findWhosTurn() {
 	//loop unti who's turn it is, is found
 	bool continueLooping = true;
 	for(int i = 0; continueLooping; i++) {
-		if((circleArray[0][i].color == 'r') || (circleArray[0][i].color == 'b'))
+		if((circleArray[0][i].color == 'r') || (circleArray[0][i].color == 'g')) {
 			return circleArray[0][i].color;
+			continueLooping = false;
+		}
 	}
 }
 
@@ -113,10 +115,15 @@ void drawButtons() {
 	glVertex2i(SCREENWIDTH-20,60);
 	glVertex2i(SCREENWIDTH-20,20);
 	glVertex2i(SCREENWIDTH-200,20);
+
+	glVertex2i(SCREENWIDTH-320, 60);
+	glVertex2i(SCREENWIDTH-220, 60);
+	glVertex2i(SCREENWIDTH-220, 20);
+	glVertex2i(SCREENWIDTH-320, 20);
 	glEnd();
 	//draw text ("Reset Game");
 	glColor3f(0.0,0.0,0.0);
-	glRasterPos2i(SCREENWIDTH-170,30);// yo you can use the writeText function to write text
+	/*glRasterPos2i(SCREENWIDTH-170,30);// yo you can use the writeText function to write text
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 82);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 115);
@@ -126,7 +133,8 @@ void drawButtons() {
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 71);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 97);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 109);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);*/
+	writeText(SCREENWIDTH-170, 30, "Reset Game");
 }
 
 void drawGame(void)
@@ -155,7 +163,6 @@ void drawGame(void)
 void drawPlayerTurnBox() {
 	//draw who's turn it is
 	glColor3f(0.0,0.0,0.0);
-	char c = findWhosTurn();
 	if (findWhosTurn() == 'r') {
 		//"Red"
 		glColor3f(1.0,0.0,0.0);
@@ -275,8 +282,7 @@ void writeText(GLfloat x, GLfloat y, char *text)
 {
     char *p;
     
-   
-	glColor3f(1.0,0.0,0.0); 
+    glPushMatrix(); 
     glRasterPos2f(x,y); 
     for (p = text; *p; p++)
         glutBitmapCharacter (GLUT_BITMAP_TIMES_ROMAN_24, *p);

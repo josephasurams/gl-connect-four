@@ -155,7 +155,7 @@ void drawGame(void)
 void drawPlayerTurnBox() {
 	//draw who's turn it is
 	glColor3f(0.0,0.0,0.0);
-	//char c = findWhosTurn();
+	char c = findWhosTurn();
 	if (findWhosTurn() == 'r') {
 		//"Red"
 		glColor3f(1.0,0.0,0.0);

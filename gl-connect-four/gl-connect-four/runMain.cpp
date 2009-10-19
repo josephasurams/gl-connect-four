@@ -5,22 +5,15 @@
 
 #include <gl\glut.h>
 
-//used for glut init - Don't really do anything!
-int argc = 1;
-char *argv = "";
 
-#define SCREENWIDTH 800
-#define SCREENHEIGHT 600
-
-
-
+//------------------ Circle -------------------------------------------
 typedef struct
 {
 	GLfloat x,y;
 	char color; 
 
 }circle;
-
+//---------------------Fuctions Declarations---------------------------
 void writeText(GLfloat x, GLfloat y, char *text);
 void myMouse(int button, int state, int x, int y);
 void keyboard(unsigned char key,int x, int y);
@@ -32,31 +25,37 @@ void drawButtons();
 void drawPlayerTurnBox();
 char findWhosTurn();
 void camera(void);
+//----------------------Variable Declaratiions----------------------------
 
-
-float R; 
-float radius = 20.0;
+float radius = 20.0, R;
 circle circleArray[7][7]; 
 int gameArray[6][7]; 
 bool highlightNewButton = false;
 bool highlightExitButton = false;
 #define TWOPI 2*3.14159265
+//used for glut init - Don't really do anything!
+int argc = 1;
+char *argv = "";
 
+#define SCREENWIDTH 800
+#define SCREENHEIGHT 600
 
+//---------------------------------Set Window Function ------------------------
 void setWindow(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top)
 {
 	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+	//glLoadIdentity();
 	gluOrtho2D(left,right,bottom,top); 
 
 	//reset aspect ratio
 	R = fabs((right-left)/(top - bottom)); 
 }
-
+//-----------------SetViewPort ------------------------------------------------
 void setViewport(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top)
 {
 	glViewport((int)left,(int)right,(int)(right-left),(int)(bottom-top)); 
 }
+//-------------------MyInit------------------------------------------------------
 void myInit(void)
 {
 	glClearColor(0.25,0.25,0.25,1.0);
@@ -68,7 +67,7 @@ void myInit(void)
 	newGame();
 }
 
-
+//--------------------FindWhosTurn---------------------------------------------------
 
 char findWhosTurn() {
 	//loop unti who's turn it is, is found
@@ -82,7 +81,7 @@ char findWhosTurn() {
 }
 
 
-
+//-------------------------NewGame----------------------------------------------------
 void newGame(void)
 {
 	
@@ -94,7 +93,7 @@ void newGame(void)
 		}
 	}
 
-	//Set up the color and places of the circles--------------------------------
+	//Set up the color and places of the circles--------------
 	for(int m = 0; m < 7; m++)
 	{
 		for(int z = 0, w = 0; z < 7;z++,w +=20)
@@ -107,7 +106,7 @@ void newGame(void)
 	circleArray[0][0].color = 'r'; //red
 
 }
-
+//------------------------DrawButtons------------------------------------------------
 void drawButtons() {
 	//draw button background
 	highlightNewButton?glColor3f(1.0,0.0,0.0):glColor3f(1.0,1.0,0.0);
@@ -130,14 +129,14 @@ void drawButtons() {
 	writeText(SCREENWIDTH-170, 30, "Reset Game");
 	writeText(SCREENWIDTH-280, 30, "Exit");
 }
-
+//-------------------------------------DrawGame-----------------------------------------
 void drawGame(void)
 {
 	drawButtons();
 	drawPlayerTurnBox();
 	glPushMatrix();
 	
-	
+
 	glColor3f(1.0,1.0,0.0);
 	glRecti(150,80,630,385);
 	glTranslatef(70,350,0);
@@ -155,7 +154,7 @@ void drawGame(void)
 	glPopMatrix();
 	
 }
-
+//-----------------DrawPlayerTurnBox-----------------------------------------
 void drawPlayerTurnBox() {
 	//draw who's turn it is
 	glColor3f(0.0,0.0,0.0);
@@ -189,7 +188,7 @@ void drawPlayerTurnBox() {
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 114);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 110);
 }
-
+//------------------------------DrawCircles----------------------------------
 void drawCircle(int i, int j)
 {
 	float x = circleArray[i][j].x;
@@ -223,9 +222,10 @@ void myDisplay(void)
 	
 	glutSwapBuffers();
 	
-	
+	 
+	 
 }
-
+//----------------------------------MyReshape--------------------------------------
 void myReshape(GLsizei W, GLsizei H)
 {
 	if(R > W/H) //use global window aspect ratio
@@ -233,12 +233,12 @@ void myReshape(GLsizei W, GLsizei H)
 	else
 		setViewport(0,H*R,0,H);
 }
-
+//------------------------------myIdle------------------------------------------
 void myIdle()
 {
 	glutPostRedisplay();
 }
-
+//-------------------------------MAIN----------------------------------------------------
 int main()
 {
 	glutInit(&argc, &argv);
@@ -256,7 +256,7 @@ int main()
 
 	return 0; 
 }
-
+//----------------------------MyMouse--------------------------------------------------------
 void myMouse(int button, int state, int x, int y)
 {
 	//invert y
@@ -280,7 +280,7 @@ void myMouse(int button, int state, int x, int y)
 			highlightExitButton = false;
 	}
 }
-
+//-----------------------------WriteText--------------------------------------
 void writeText(GLfloat x, GLfloat y, char *text)
 {
     char *p;
@@ -291,7 +291,7 @@ void writeText(GLfloat x, GLfloat y, char *text)
         glutBitmapCharacter (GLUT_BITMAP_TIMES_ROMAN_24, *p);
    
 	
-}
+}//-------------------------------KeyBoard------------------------------------
 void keyboard(unsigned char key,int x, int y)
 {
 
@@ -413,7 +413,7 @@ void keyboard(unsigned char key,int x, int y)
 	   
    }//end of if drop Key
   
-}
+}//------------------------------Delay-------------------------------------------
 void delay(const int n)
 {
  time_t start_time, cur_time;

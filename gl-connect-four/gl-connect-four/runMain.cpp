@@ -191,8 +191,8 @@ void drawCircle(int i, int j)
 {
 	float x = circleArray[i][j].x;
 	float y = circleArray[i][j].y;
-	if(circleArray[i][j].color == 'g')//Green
-		glColor3f(0.0,1.0,0.0); 
+	if(circleArray[i][j].color == 'g')//Gray
+		glColor3f(0.25,0.25,0.25); 
 	if(circleArray[i][j].color == 'b')//black
 		glColor3f(0.0,0.0,0.0); 
 	if(circleArray[i][j].color == 'r')//Red

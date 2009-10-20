@@ -81,7 +81,7 @@ void myInit(void)
 	glLineWidth(2.0);
 	setWindow(0,SCREENWIDTH,0,SCREENHEIGHT);
 	setViewport(0,SCREENWIDTH,0,SCREENHEIGHT);
-	Image* image = loadBMP("mytexture.bmp");
+	Image* image = loadBMP("gameLogo.bmp");
 	_textureId = loadTexture(image);
 	delete image;
 	
@@ -248,21 +248,20 @@ void myDisplay(void)
 	
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, _textureId);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glBegin(GL_QUADS);
-	
 	glTexCoord2f(0.0f, 0.0f);
-	glVertex2i(165,SCREENHEIGHT-130);
+	glVertex2i(165,SCREENHEIGHT-170);
 	glTexCoord2f(1.0f, 0.0f);
-	glVertex2i(615,SCREENHEIGHT-130);
-	glTexCoord2f(1.0f, 1.0f);
+	glVertex2i(615,SCREENHEIGHT-170);
+	glTexCoord2f(1.0f, 1.2f);
 	glVertex2i(615,SCREENHEIGHT-20);
-	glTexCoord2f(0.0f, 1.0f);
+	glTexCoord2f(0.0f, 1.2f);
 	glVertex2i(165,SCREENHEIGHT-20);
-	
 	glEnd();
+	glDisable(GL_TEXTURE_2D);
 	
     drawGame();
 	glutSwapBuffers();

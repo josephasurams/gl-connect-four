@@ -41,7 +41,7 @@ bool highlightExitButton = false;
 void setWindow(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top)
 {
 	glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
+	glLoadIdentity();
 	gluOrtho2D(left,right,bottom,top); 
 
 	//reset aspect ratio

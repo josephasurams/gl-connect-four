@@ -32,7 +32,7 @@ circle circleArray[7][7];
 int gameArray[6][7]; 
 bool highlightNewButton = false;
 bool highlightExitButton = false;
-GLuint _textureId; //The id of the texture
+GLuint _textureId; //The id of the texture 
 
 
 //----------------------- Variable Define------------------------------------

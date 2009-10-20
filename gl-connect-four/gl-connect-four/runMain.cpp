@@ -33,7 +33,7 @@ int gameArray[6][7];
 bool highlightNewButton = false;
 bool highlightExitButton = false;
 GLuint _textureId; //The id of the texture
-bool tmp = false;
+
 
 //----------------------- Variable Define------------------------------------
 #define TWOPI 2*3.14159265
@@ -155,8 +155,8 @@ void drawGame(void)
 {
 	drawButtons();
 	drawPlayerTurnBox();
-	glMatrixMode(GL_MODELVIEW); //Switch to the drawing perspective
-	glLoadIdentity(); //Reset the drawing perspective
+	//glMatrixMode(GL_MODELVIEW); //Switch to the drawing perspective
+	//glLoadIdentity(); //Reset the drawing perspective
 	glPushMatrix();
 	glRotatef(angle, 0.0f, 0.0f, 1.0f); 
 
@@ -177,14 +177,8 @@ void drawGame(void)
 	}
 	glPopMatrix();
 	
-	glutSwapBuffers();
-	glutPostRedisplay();
-	if(tmp )
-	angle += 1.00;
-	if (angle > 360) {
-		angle =0;
-		tmp = false; 
-	}
+	
+	
 }
 //-----------------DrawPlayerTurnBox-----------------------------------------
 void drawPlayerTurnBox() {
@@ -271,6 +265,7 @@ void myDisplay(void)
 	glEnd();
 	
     drawGame();
+	glutSwapBuffers();
 	
 	
 	
@@ -438,7 +433,7 @@ void keyboard(unsigned char key,int x, int y)
 					gameArray[z-1][m] = 0;
 					gameArray[z][m]= 1;
 					circleArray[0][0].color = 'b';//change turn
-					tmp = true; 
+					
 				
 				}
 				
@@ -455,7 +450,7 @@ void keyboard(unsigned char key,int x, int y)
 					gameArray[z-1][m] = 0;
 					gameArray[z][m] = 2; 
 					circleArray[0][0].color = 'r';//change turn
-					tmp = true; 
+					 
 				}//end of the if
 				
 			}//end of if

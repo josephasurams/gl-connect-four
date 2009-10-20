@@ -135,7 +135,7 @@ void drawGame(void)
 	glMatrixMode(GL_MODELVIEW); //Switch to the drawing perspective
 	glLoadIdentity(); //Reset the drawing perspective
 	glPushMatrix();
-	glRotatef(angle, 0.0f, 0.0f, 3.0f); 
+	glRotatef(angle, 0.0f, 0.0f, 1.0f); 
 
 	glColor3f(1.0,1.0,0.0);
 	glRecti(150,80,630,385);
@@ -157,7 +157,7 @@ void drawGame(void)
 	glutSwapBuffers();
 	glutPostRedisplay();
 	if(tmp )
-	angle += 1.0;
+	angle += 1.00;
 	if (angle > 360) {
 		angle =0;
 		tmp = false; 

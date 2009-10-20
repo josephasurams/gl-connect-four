@@ -25,12 +25,13 @@ void drawPlayerTurnBox();
 char findWhosTurn();
 void camera(void);
 //----------------------Variable Declaratiions----------------------------
-
+GLfloat angle = 0; 
 float radius = 20.0, R;
 circle circleArray[7][7]; 
 int gameArray[6][7]; 
 bool highlightNewButton = false;
 bool highlightExitButton = false;
+bool tmp = false; 
 
 //----------------------- Variable Define------------------------------------
 #define TWOPI 2*3.14159265
@@ -131,8 +132,10 @@ void drawGame(void)
 {
 	drawButtons();
 	drawPlayerTurnBox();
+	glMatrixMode(GL_MODELVIEW); //Switch to the drawing perspective
+	glLoadIdentity(); //Reset the drawing perspective
 	glPushMatrix();
-	
+	glRotatef(angle, 1.0f, 2.0f, 3.0f); 
 
 	glColor3f(1.0,1.0,0.0);
 	glRecti(150,80,630,385);
@@ -141,6 +144,7 @@ void drawGame(void)
 	{
 		for(int z = 0,w = 0; z < 7; z++,w+=20)
 		{
+			
 			glTranslatef(50,0,0);
 			
 			drawCircle(m,z);
@@ -150,6 +154,14 @@ void drawGame(void)
 	}
 	glPopMatrix();
 	
+	glutSwapBuffers();
+	glutPostRedisplay();
+	if(tmp )
+	angle += 1.0;
+	if (angle > 360) {
+		angle =0;
+		tmp = false; 
+	}
 }
 //-----------------DrawPlayerTurnBox-----------------------------------------
 void drawPlayerTurnBox() {
@@ -212,12 +224,12 @@ void drawCircle(int i, int j)
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<myDisplay>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 void myDisplay(void)
 {
-	glClear(GL_COLOR_BUFFER_BIT); //Clear the screen
 	
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
     drawGame();
 	
-	glutSwapBuffers();
+	
 	
 	 
 	 
@@ -383,6 +395,7 @@ void keyboard(unsigned char key,int x, int y)
 					gameArray[z-1][m] = 0;
 					gameArray[z][m]= 1;
 					circleArray[0][0].color = 'b';//change turn
+					tmp = true; 
 				
 				}
 				
@@ -399,6 +412,7 @@ void keyboard(unsigned char key,int x, int y)
 					gameArray[z-1][m] = 0;
 					gameArray[z][m] = 2; 
 					circleArray[0][0].color = 'r';//change turn
+					tmp = true; 
 				}//end of the if
 				
 			}//end of if

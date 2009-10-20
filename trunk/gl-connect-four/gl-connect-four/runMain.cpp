@@ -135,7 +135,7 @@ void drawGame(void)
 	glMatrixMode(GL_MODELVIEW); //Switch to the drawing perspective
 	glLoadIdentity(); //Reset the drawing perspective
 	glPushMatrix();
-	glRotatef(angle, 1.0f, 2.0f, 3.0f); 
+	glRotatef(angle, 0.0f, 0.0f, 3.0f); 
 
 	glColor3f(1.0,1.0,0.0);
 	glRecti(150,80,630,385);

@@ -428,12 +428,12 @@ void keyboard(unsigned char key,int x, int y)
 				{												//Check if it is able to drop
 					circleArray[z][m].color = 'g';
 					circleArray[z+1][m].color = 'r';
-					
+
 					gameArray[z-1][m] = 0;
 					gameArray[z][m]= 1;
 					circleArray[0][0].color = 'b';//change turn
 					
-				
+				 
 				}
 				
 			

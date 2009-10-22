@@ -200,21 +200,7 @@ void drawPlayerTurnBox() {
 	}
 	//" player's turn"
 	glColor3f(1.0,1.0,0.0);
-	glRasterPos2i((findWhosTurn()=='r')?63:80, 30);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 32);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 80);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 108);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 97);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 121);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 114);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 96);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 115);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 32);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 84);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 117);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 114);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 110);
+	writeText((findWhosTurn()=='r')?63:80, 30, " player's turn");
 	}
 }
 //------------------------------DrawCircles----------------------------------
@@ -241,10 +227,9 @@ void drawCircle(int i, int j)
 	glFlush(); 
 
 }
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<myDisplay>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//------------------------------Display----------------------------------
 void myDisplay(void)
 {
-	//glClear(GL_COLOR_BUFFER_BIT); //Clear the screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -835,22 +820,15 @@ void keyboard(unsigned char key,int x, int y)
 									writeText(400.0,400.0, "Black Wins!!!");
 									glutSwapBuffers();
 									delay(1);
-
 								}//end of for loop
-								
 								turn = true; 
 								writeText(550.0,450.0, "New Game");
 								glutSwapBuffers(); 
 								delay(2); 
 								newGame();;
-								
 							}//end if		
-	
 			}//end of For Loop
-				
 		}//end of For loop
-
-	   
    }//end of if drop Key
   
 }//------------------------------Delay-------------------------------------------

@@ -30,7 +30,7 @@ GLfloat angle = 0;
 float radius = 20.0, R;
 circle circleArray[7][7]; 
 int gameArray[6][7]; 
-bool highlightNewButton = false;
+bool highlightNewButton = false, turn = true;
 bool highlightExitButton = false;
 GLuint _textureId; //The id of the texture 
 
@@ -184,6 +184,8 @@ void drawGame(void)
 void drawPlayerTurnBox() {
 	//draw who's turn it is
 	glColor3f(0.0,0.0,0.0);
+	if(turn == true)
+	{
 	if (findWhosTurn() == 'r') {
 		//"Red"
 		glColor3f(1.0,0.0,0.0);
@@ -213,6 +215,7 @@ void drawPlayerTurnBox() {
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 117);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 114);
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 110);
+	}
 }
 //------------------------------DrawCircles----------------------------------
 void drawCircle(int i, int j)
@@ -335,6 +338,7 @@ void writeText(GLfloat x, GLfloat y, char *text)
     glRasterPos2f(x,y); 
     for (p = text; *p; p++)
         glutBitmapCharacter (GLUT_BITMAP_TIMES_ROMAN_24, *p);
+	glPopMatrix(); 
    
 	
 }//-------------------------------KeyBoard------------------------------------
@@ -458,6 +462,394 @@ void keyboard(unsigned char key,int x, int y)
 
 
 	  //Check for Winner ----------------------------------------------------
+	   for(int m = 0; m < 7; m++)
+		{
+			for(int z = 0; z < 6; z++)
+			{
+				//check player 1(red circle) across--------------------------------------------------
+				if(gameArray[z][m]==1)
+					if(gameArray[z][m+1] ==1)
+						if(gameArray[z][m+2] ==1)
+							if(gameArray[z][m+3] ==1)
+							{
+								if(m < 4)//not to check the last 4 colums of elements to the right    // elements gameArray[z][4]
+								{															//       gameArray[z][4]						
+								turn = false; //not show whos turn is						//		 gameArray[z][6]
+								
+								for(int v = 0; v < 7; v++)//not show any cirlce to be dropped. 
+								{
+									circleArray[0][v].color = 'g'; 
+								}
+								for(int v = 0; v < 3; v++)//blink 3 times
+								{
+									
+									
+									circleArray[z+1][m].color = 'g';
+									circleArray[z+1][m+1].color = 'g';
+									circleArray[z+1][m+2].color = 'g';
+									circleArray[z+1][m+3].color = 'g';
+									
+									drawGame();
+									glColor3f(1.0, 1.0, 0.0); 
+									writeText(400.0,400.0, "Red Wins!!!");
+									glutSwapBuffers();
+									delay(1);
+							
+									circleArray[z+1][m].color = 'r';
+									circleArray[z+1][m+1].color = 'r';
+									circleArray[z+1][m+2].color = 'r';
+									circleArray[z+1][m+3].color = 'r';
+								
+									drawGame();	
+									glColor3f(1.0, 1.0, 0.0);
+									writeText(400.0,400.0, "Red Wins!!!");
+									glutSwapBuffers();
+									delay(1);
+
+								}//end of for loop
+								
+								turn = true; 
+								writeText(550.0,450.0, "New Game");
+								glutSwapBuffers(); 
+								delay(2); 
+								newGame(); 
+								}
+								 
+							}
+				//check player 2(Black circle) across--------------------------------------------------
+				if(gameArray[z][m]==2)
+					if(gameArray[z][m+1] ==2)
+						if(gameArray[z][m+2] ==2)
+							if(gameArray[z][m+3] ==2)
+							{
+								if(m < 4)//not to check the last element to the right    // elements gameArray[z][4]
+								{															//       gameArray[z][4]						
+								turn = false; //not show whos turn is						//		 gameArray[z][6]
+								for(int v = 0; v < 7; v++)//not show any cirlce to be dropped. 
+								{
+									circleArray[0][v].color = 'g'; 
+								}
+								for(int v = 0; v < 3; v++)//blink 3 times
+								{
+									
+									
+									circleArray[z+1][m].color = 'g';
+									circleArray[z+1][m+1].color = 'g';
+									circleArray[z+1][m+2].color = 'g';
+									circleArray[z+1][m+3].color = 'g';
+									
+									drawGame();
+									glColor3f(1.0, 1.0, 0.0); 
+									writeText(400.0,400.0, "Black Wins!!!");
+									glutSwapBuffers();
+									delay(1);
+							
+									circleArray[z+1][m].color = 'b';
+									circleArray[z+1][m+1].color = 'b';
+									circleArray[z+1][m+2].color = 'b';
+									circleArray[z+1][m+3].color = 'b';
+								
+									drawGame();	
+									glColor3f(1.0, 1.0, 0.0);
+									writeText(400.0,400.0, "Black Wins!!!");
+									glutSwapBuffers();
+									delay(1);
+
+								}//end of for loop
+								
+								turn = true; 
+								writeText(550.0,450.0, "New Game");
+								glutSwapBuffers(); 
+								delay(2); 
+								newGame(); 
+								}
+							}//end if
+							
+				//check player 1(red circle) going diagonal up------------------------------------------------
+				if(gameArray[z][m]==1)
+					if(gameArray[z-1][m+1] ==1)
+						if(gameArray[z-2][m+2] ==1)
+							if(gameArray[z-3][m+3] ==1)
+							{	if(z >2)
+								if(m < 4 )//not to check the last element to the right 
+								{
+								turn = false; //not show the whos turn. 
+								for(int v = 0; v < 7; v++)//not show any circle to be droped. 
+								{
+									circleArray[0][v].color = 'g'; 
+								}
+
+								for(int v = 0; v < 3; v++)//blink 3 times
+								{
+									circleArray[z+1][m].color = 'g';
+									circleArray[z][m+1].color = 'g';
+									circleArray[z-1][m+2].color = 'g';
+									circleArray[z-2][m+3].color = 'g';
+									
+									drawGame();
+									glColor3f(1.0, 1.0, 0.0); 
+									writeText(400.0,400.0, "Red cratWins!!!");
+									glutSwapBuffers();
+									delay(1);
+							
+									circleArray[z+1][m].color = 'r';
+									circleArray[z][m+1].color = 'r';
+									circleArray[z-1][m+2].color = 'r';
+									circleArray[z-2][m+3].color = 'r';
+								
+									drawGame();
+									glColor3f(1.0, 1.0, 0.0); 
+									writeText(400.0,400.0, "Red cratWins!!!");
+									glutSwapBuffers();
+									delay(1);
+
+								}//end of for loop
+								
+								turn = true; 
+								writeText(550.0,450.0, "New Game");
+								glutSwapBuffers(); 
+								delay(2); 
+								newGame(); 
+								}
+							}//end if
+							
+				//check player 2(Black circle) going diagonal up-------------------------------------------------
+				if(gameArray[z][m]==2)
+					if(gameArray[z-1][m+1] ==2)
+						if(gameArray[z-2][m+2] ==2)
+							if(gameArray[z-3][m+3] ==2)
+							{
+							  if(z >2)// not to check the first 3 rows of elements across the top
+							  if(m < 4)//not to check the last 3 colums of elements to the right 
+								{
+								turn = false; //not show the whos turn. 
+								for(int v = 0; v < 7; v++)//not show any circle to be droped. 
+								{
+									circleArray[0][v].color = 'g'; 
+								}
+
+								for(int v = 0; v < 3; v++)//blink 3 times
+								{
+									circleArray[z+1][m].color = 'g';
+									circleArray[z+2][m-1].color = 'g';
+									circleArray[z+3][m-2].color = 'g';
+									circleArray[z+4][m-3].color = 'g';
+									
+									drawGame();
+									glColor3f(1.0, 1.0, 0.0); 
+									writeText(400.0,400.0, "Black Wins!!!");
+									glutSwapBuffers();
+									delay(1);
+							
+									circleArray[z+1][m].color = 'b';
+									circleArray[z+2][m-1].color = 'b';
+									circleArray[z+3][m-2].color = 'b';
+									circleArray[z+4][m-3].color = 'b';
+								
+									drawGame();
+									glColor3f(1.0, 1.0, 0.0); 
+									writeText(400.0,400.0, "Black Wins!!!");
+									glutSwapBuffers();
+									delay(1);
+
+								}//end of for loop
+								
+								turn = true; 
+								writeText(550.0,450.0, "New Game");
+								glutSwapBuffers(); 
+								delay(2); 
+								newGame(); 
+							  }
+							}//end if
+							
+				//check player 1(red circle) going diagonal down-----------------------------------------------
+				if(gameArray[z][m]==1)
+					if(gameArray[z+1][m+1] ==1)
+						if(gameArray[z+2][m+2] ==1)
+							if(gameArray[z+3][m+3] ==1)
+							{
+								if(m < 4)//not to check the last 3 colums of elements to the right
+								{
+								turn = false; //not show the whos turn. 
+								for(int v = 0; v < 7; v++)//not show any circle to be droped. 
+								{
+									circleArray[0][v].color = 'g'; 
+								}
+								for(int v = 0; v < 3; v++)//blink 3 times
+								{
+									circleArray[z+1][m].color = 'g';
+									circleArray[z+2][m+1].color = 'g';
+									circleArray[z+3][m+2].color = 'g';
+									circleArray[z+4][m+3].color = 'g';
+									
+									drawGame();
+									glColor3f(1.0, 1.0, 0.0); 
+									writeText(400.0,400.0, "Red Wins!!!");
+									glutSwapBuffers();
+									delay(1);
+							
+									circleArray[z+1][m].color = 'r';
+									circleArray[z+2][m+1].color = 'r';
+									circleArray[z+3][m+2].color = 'r';
+									circleArray[z+4][m+3].color = 'r';
+								
+									drawGame();
+									glColor3f(1.0, 1.0, 0.0); 
+									writeText(400.0,400.0, "Red Wins!!!");
+									glutSwapBuffers();
+									delay(1);;
+
+								}//end of for loop
+								
+								turn = true; 
+								writeText(550.0,450.0, "New Game");
+								glutSwapBuffers(); 
+								delay(2); 
+								newGame(); 
+								}
+							}//end if
+							
+				//check player 2(Black circle) going diagonal down-------------------------------------------------
+				if(gameArray[z][m]==2)
+					if(gameArray[z+1][m+1] ==2)
+						if(gameArray[z+2][m+2] ==2)
+							if(gameArray[z+3][m+3] ==2)
+							{
+								if(m < 4)//not to check the last 3 colums of elements to the right
+								{
+								turn = false; //not show the whos turn. 
+								for(int v = 0; v < 7; v++)//not show any circle to be droped. 
+								{
+									circleArray[0][v].color = 'g'; 
+								}
+								for(int v = 0; v < 3; v++)//blink 3 times
+								{
+									circleArray[z+1][m].color = 'g';
+									circleArray[z+2][m+1].color = 'g';
+									circleArray[z+3][m+2].color = 'g';
+									circleArray[z+4][m+3].color = 'g';
+									
+									drawGame();
+									glColor3f(1.0, 1.0, 0.0); 
+									writeText(400.0,400.0, "Black Wins!!!");
+									glutSwapBuffers();
+									delay(1);
+							
+									circleArray[z+1][m].color = 'b';
+									circleArray[z+2][m+1].color = 'b';
+									circleArray[z+3][m+2].color = 'b';
+									circleArray[z+4][m+3].color = 'b';
+								
+									drawGame();
+									glColor3f(1.0, 1.0, 0.0); 
+									writeText(400.0,400.0, "Black Wins!!!");
+									glutSwapBuffers();
+									delay(1);
+
+								}//end of for loop
+								
+								turn = true; 
+								writeText(550.0,450.0, "New Game");
+								glutSwapBuffers(); 
+								delay(2); 
+								newGame();
+								}
+							}//end if
+
+				//check player 1 (red circle)four going down-------------------------------------------------
+				if(gameArray[z][m]==1)
+					if(gameArray[z+1][m] ==1)
+						if(gameArray[z+2][m] ==1)
+							if(gameArray[z+3][m] ==1)
+							{
+								turn = false; //not show the whos turn. 
+								for(int v = 0; v < 7; v++)//not show any circle to be droped. 
+								{
+									circleArray[0][v].color = 'g'; 
+								}
+								for(int v = 0; v < 3; v++)//blink 3 times
+								{
+									circleArray[z+1][m].color = 'g';
+									circleArray[z+2][m].color = 'g';
+									circleArray[z+3][m].color = 'g';
+									circleArray[z+4][m].color = 'g';
+									
+									drawGame();
+									glColor3f(1.0, 1.0, 0.0); 
+									writeText(400.0,400.0, "Red Wins!!!");
+									glutSwapBuffers();
+									delay(1);
+							
+									circleArray[z+1][m].color = 'r';
+									circleArray[z+2][m].color = 'r';
+									circleArray[z+3][m].color = 'r';
+									circleArray[z+4][m].color = 'r';
+								
+									drawGame();
+									glColor3f(1.0, 1.0, 0.0); 
+									writeText(400.0,400.0, "Red Wins!!!");
+									glutSwapBuffers();
+									delay(1);
+
+								}//end of for loop
+								
+								turn = true; 
+								writeText(550.0,450.0, "New Game");
+								glutSwapBuffers(); 
+								delay(2); 
+								newGame();
+								
+							}//end if
+							
+				//check player 2(Black circle)// four going down----------------------------------------------
+				if(gameArray[z][m]==2)
+					if(gameArray[z+1][m] ==2)
+						if(gameArray[z+2][m] ==2)
+							if(gameArray[z+3][m] ==2)
+							{
+								turn = false; //not show the whos turn. 
+								for(int v = 0; v < 7; v++)//not show any circle to be droped. 
+								{
+									circleArray[0][v].color = 'g'; 
+								}
+								for(int v = 0; v < 3; v++)//blink 3 times
+								{
+									circleArray[z+1][m].color = 'g';
+									circleArray[z+2][m].color = 'g';
+									circleArray[z+3][m].color = 'g';
+									circleArray[z+4][m].color = 'g';
+									
+									drawGame();
+									glColor3f(1.0, 1.0, 0.0); 
+									writeText(400.0,400.0, "Black Wins!!!");
+									glutSwapBuffers();
+									delay(1);
+							
+									circleArray[z+1][m].color = 'b';
+									circleArray[z+2][m].color = 'b';
+									circleArray[z+3][m].color = 'b';
+									circleArray[z+4][m].color = 'b';
+								
+									drawGame();
+									glColor3f(1.0, 1.0, 0.0); 
+									writeText(400.0,400.0, "Black Wins!!!");
+									glutSwapBuffers();
+									delay(1);
+
+								}//end of for loop
+								
+								turn = true; 
+								writeText(550.0,450.0, "New Game");
+								glutSwapBuffers(); 
+								delay(2); 
+								newGame();;
+								
+							}//end if		
+	
+			}//end of For Loop
+				
+		}//end of For loop
+
 	   
    }//end of if drop Key
   

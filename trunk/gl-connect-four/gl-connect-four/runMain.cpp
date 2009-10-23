@@ -573,7 +573,7 @@ void keyboard(unsigned char key,int x, int y)
 									
 									drawGame();
 									glColor3f(1.0, 1.0, 0.0); 
-									writeText(400.0,400.0, "Red cratWins!!!");
+									writeText(400.0,400.0, "Red Wins!!!");
 									glutSwapBuffers();
 									delay(1);
 							
@@ -584,7 +584,7 @@ void keyboard(unsigned char key,int x, int y)
 								
 									drawGame();
 									glColor3f(1.0, 1.0, 0.0); 
-									writeText(400.0,400.0, "Red cratWins!!!");
+									writeText(400.0,400.0, "Red Wins!!!");
 									glutSwapBuffers();
 									delay(1);
 

@@ -555,7 +555,7 @@ void keyboard(unsigned char key,int x, int y)
 					if(gameArray[z-1][m+1] ==1)
 						if(gameArray[z-2][m+2] ==1)
 							if(gameArray[z-3][m+3] ==1)
-							{	if(z >2)
+							{	//if(z >2)
 								if(m < 4 )//not to check the last element to the right 
 								{
 								turn = false; //not show the whos turn. 
@@ -604,7 +604,7 @@ void keyboard(unsigned char key,int x, int y)
 						if(gameArray[z-2][m+2] ==2)
 							if(gameArray[z-3][m+3] ==2)
 							{
-							  if(z >2)// not to check the first 3 rows of elements across the top
+							  //if(z >2)// not to check the first 3 rows of elements across the top
 							  if(m < 4)//not to check the last 3 colums of elements to the right 
 								{
 								turn = false; //not show the whos turn. 

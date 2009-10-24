@@ -189,7 +189,7 @@ void drawPlayerTurnBox() {
 	if (findWhosTurn() == 'r') {
 		//"Red"
 		glColor3f(1.0,0.0,0.0);
-		writeText("Red");
+		writeText(20.0, 30.0,"Red");
 	} else {
 		//"black"
 		glColor3f(0.0,0.0,0.0);

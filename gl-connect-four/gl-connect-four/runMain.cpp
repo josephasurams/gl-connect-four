@@ -189,10 +189,7 @@ void drawPlayerTurnBox() {
 	if (findWhosTurn() == 'r') {
 		//"Red"
 		glColor3f(1.0,0.0,0.0);
-		glRasterPos2i(20,30);
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 82);
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 101);
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 100);
+		writeText("Red");
 	} else {
 		//"black"
 		glColor3f(0.0,0.0,0.0);
